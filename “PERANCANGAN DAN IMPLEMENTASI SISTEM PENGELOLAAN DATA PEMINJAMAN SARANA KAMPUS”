@@ -1,0 +1,122 @@
+data_base =[]
+def tambah_data_peminjam ():
+    print('        ')
+    print('---DATA PEMINJAM---')
+    nama = input(str('masukan nama :'))
+    nim = input(str('masukan nim :'))
+    sarana = input(str('sarana yang dipinjam :'))
+    lama_peminjaman = int(input('lama peminjaman (hari) :')) 
+    batas_hari = 7
+    denda_perhari = 5000
+
+    if lama_peminjaman > batas_hari:
+        hari_telat = lama_peminjaman - batas_hari
+        denda = hari_telat * denda_perhari
+
+    else:
+        denda = 0
+        
+    data ={
+        'NAMA': nama,
+        'NIM': nim,
+        'SARANA' : sarana,
+        'LAMA PEMINJAMAN' : lama_peminjaman,
+        'DENDA' : denda
+        }
+    
+    data_base.append(data)
+    print('data berhasil ditambahkan')
+
+def tampilakn_data_peminjaman ():
+    print('                 ')
+    print('---menampilkan data peminjamaan---')
+    if len(data_base) == 0:
+        print('belum ada data')
+        return
+    
+    i =0
+    while True:
+       if i >= len(data_base):
+          break
+       data = data_base[i]
+       print(f"-nama : {data['NAMA']}")
+       print(f"nim : {data['NIM']}")
+       print(f"sarana : {data['SARANA']}")
+       print(f"lama peminjaman (hari) : {data['LAMA PEMINJAMAN']}")
+       print(f"denda : Rp{data['DENDA']}")
+
+       i += 1
+    
+def cari_data_peminjam ():
+    print('              ')
+    print('---cari data peminjam---')
+    cari_data = input('masukan nama :')
+
+    i = 0
+    while True:
+       if i >= len(data_base):
+          break
+
+       data = data_base[i]
+       if data['NAMA'] == cari_data:
+            print('data ditemukan')
+            print(f"nama : {data['NAMA']}")
+            print(f"nim : {data['NIM']}")
+            print(f"sarana : {data['SARANA']}")
+            print(f"lama peminjaman (hari) : {data['LAMA PEMINJAMAN']}")
+            return
+       i += 1
+    print('data tidak terdaftar')
+
+def hapus_data_peminjam():
+    print('           ')
+    print('---hapus data peminjam---')
+    hapus_nama = input('masukan nama :')
+
+    i = 0
+    while True:
+       if i >= len(data_base):
+          break
+
+       data = data_base[i]
+       if data ['NAMA'] == hapus_nama:
+            konfirmasi =input('apakah anda akan menghapus (y) :')
+            if konfirmasi.lower() == 'y':
+                data_base.pop(i)
+                print('data berhasil dihapus')
+
+            else:
+                print('data tidak berhasil dihapus')
+            return
+       i += 1
+
+
+def menu_sistem():
+    for _ in range(10):
+       print('      ')
+       print('---pilih menu dibwah ini---')
+       print('1. tambahkan data peminjaman')
+       print('2. tampilkan data peminjam')
+       print('3. cari data peminjaman')
+       print('4. hapus data peminjaman')
+       print('5. keluar')
+
+       menu = int(input('pilih nomer (1 - 5) :'))
+
+       if menu == 1:
+        tambah_data_peminjam()
+       elif menu == 2:
+        tampilakn_data_peminjaman()
+       elif menu == 3:
+        cari_data_peminjam()
+       elif menu == 4:
+        hapus_data_peminjam()
+       elif menu == 5:
+        print('program selesai terimakasih')
+        break
+
+       else:
+        print('menu tidak tersedia')
+    
+if __name__ == "__main__":
+    menu_sistem()
